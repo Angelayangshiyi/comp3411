@@ -1,0 +1,77 @@
+comp3411 Notes
+
+best first search
+    - a search that uses a cost function, and minimizes that function.
+    - Thus there can be a specific cost function that can make breadth and depth first search a best firsts search.
+    - for breath first search, the cost function is the count of steps.
+    - f(n) = -g(n) produces a type of depth first search, a it maximizes the distance. But its a horrible type of DFS.
+    -  
+
+Breath first search
+    - time complexity is O(n^(d+1)) if the algo finds the goal after expanding the leaves.
+    - O(n^b) if the algo finds the goal as the leaves are expanded.
+    - is a special case of uniform cost search where all the cost of the edges are 1. 
+
+Iterative deepening search
+    - the only difference with breath first search is that it does not store all the leaves, thus not an issue for memory. only stores last expanded leaves?
+    - watch youtube vide
+    - This search starts from first node everytime it expands. thus it can take along time.
+    - how does it know here it has expanded if it doesnt store every node? does it only store some sort of id of each node instead?
+
+bidirectional search
+    - when search is started from the goal and from the start, and in lock step, the leaves are expanded until they meet in middle/
+    - time complexity is b^(d/2) + b^(d/2), alot faster.
+    - Must store all the nodes in a data struct like a hash table.
+        - so that I can search quickly if the node is visited from the other side.
+    - this search would nto be feasible if there are multiple goals, or scenarios where searching from goal is hard.
+    -
+uniform cost search
+    - you pick the node that is nearest the start state
+    - uniformed search.
+    - type of best first search
+    - If all the edges are the same cost = 1, then it is a breath first search.
+    - optimal search
+
+Greedy best first search
+    - pick the node that has the shortest straight line distance from estimated goal.
+    - then pick subsequent nodes that have shortest straight line distance to goal.
+    - will not always provide shortest/optimal distance to goal.
+    - not complete and not optimal, because this search can get stuck as it finds shortest heuristic path.
+
+A* search
+    - g(n) is the distacne from start to current expanded node.
+    - h(n) is the distance from goal to current expanded node.
+    - thus A8 finds the minimum of h(n) + g(n)
+    - it is optimal and complete as long as h(n) is an underestimate for the distance to the goal.
+    - each time it expands a node, the algo chooses the next node by picking the shortest cost, its cost is the distance it travelled + straight line distance to goal from that node. Then pick the shortest cost.
+    - once it reaches the goal, it looks at the cost of the path to the goal and compares with other nodes with shorter cost and expands all other nodes with shorter cost until no more nodes have lower cost than the current cost to goal..
+    - keeps all nodes in memory
+
+iterative deepening A* search
+    - better than A* search, it expands all nodes until f(n) is greater than a threshold.
+
+heuristic(1) : count how many tiles are out of place.
+heuristic(2) : manhatten path, how far are each misplaced tiles away from correct position.
+
+
+Total manhatten distance heuristic example:
+	       1 2 3
+	       8 5 *
+	       4 7 6
+	       Imagine an 8 grid puzzle. the minimum number of moves are based on how far the misplaced tiles are from the correct positions.
+	       no.8 is 2 tiles away;
+	       7 is 1 step away;
+	       6 is 1;
+	       4 is 1 away.
+	       Total min steps are 5 moves.
+
+	Look at how to do A* search of an 8 grid puzzle.
+
+f(n) = (2-w)g(n) + wh(n)
+	w = 0, uniform cost search
+	w = 1, A*
+	w = 2, greedy heuristic search, because its just based on h(n). 
+	it is optimal as long as the heuristic h(n) is admissible, thus if w = [0,1).
+	f(n) = (2-w)(g(n) + w*h(n)/(2-w).
+	
+	

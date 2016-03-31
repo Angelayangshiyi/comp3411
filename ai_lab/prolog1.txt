@@ -1,0 +1,7 @@
+Introduction to Prolog Programming
+
+39.climb(X,_,Y,_),female(Y).
+
+40. climb('High n Dry',_,_,Date1), climb(X,_,_,Date2), later(Date1,Date2).
+
+
