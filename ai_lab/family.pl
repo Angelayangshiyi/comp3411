@@ -84,6 +84,9 @@ siblings(Child1, Child2):-
 	parent(Person,Child2),
 	Child1 \= Child2.
 
+sibling_list(Child, Siblings):-
+	findall(X, siblings(Child,X), Siblings).	
+
 %olderBrother
 olderBrother(Child1, Child2):-
 	parent(Person, Child1),
@@ -109,3 +112,36 @@ ancestor(Person, Ancestor):-
 ancestor(Person, Ancestor):-
 	parent(Parent, Person),
 	ancestor(Parent, Ancestor).
+
+%Children
+children(Parent,ChildList):-
+	findall(X, parent(Parent,X), ChildList).
+
+%lists
+is_a_list([]).                                 
+
+is_a_list(.(Head,Tail)):-                     
+%ancestor recursive
+        is_a_list(Tail).   
+
+%listCount
+%Note the use of 2 different counters.
+listCount([], 0).
+listCount([A|B], Count):-
+	listCount(B, CountBuf),
+	Count is CountBuf + 1.
+
+deepListCount([],0).
+deepListCount(A,1):-
+	A \= [],
+	A \= [_|_].
+deepListCount([A|B], Count):-
+	deepListCount(A,CountA),
+	deepListCount(B,CountB),
+	Count is CountA + CountB.
+
+		
+	
+countDescendants(Person, Count):-
+	findall(X, descendant(Person,X), DescendantList),
+	listCount(DescendantList,Count).
