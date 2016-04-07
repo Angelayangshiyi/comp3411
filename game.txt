@@ -1,0 +1,11 @@
+tic-tac-toe
+	- total number unique games that can be played is 9!.
+		- first move has 9 possible moves * second move has 8 * then 7 ... 
+		- but does not take into account symmetry, rotation, or win early.
+	- Game tree.
+
+alpha-beta tree
+	- it can find which tree to conitnue measuring.
+	- alpha is the best move we can pick for the round
+	- beta is the worse move for us (best move the opponent can pick in their round)
+	- 
