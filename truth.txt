@@ -1,0 +1,16 @@
+
+Valid when all models are true.
+Satisfiable when some models are true
+neither whenn no models are true.
+
+1. Smoke => Fire is false when smoke = 1; fire = 0; thus only satisfiable
+2. (smoke => Fire) => (- Smoke => - Fire) false when S = 0, F = 1; thus
+satisfiable.
+	= (-S or F) => (S or F)
+	= -(-S or F) Or ( S or -F)
+	
+3. B or D or (B=> D); awlways true because B or -B  = 1.
+	= B or D or (-B or D)
+		
+
+
